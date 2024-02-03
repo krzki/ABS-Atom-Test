@@ -1,0 +1,30 @@
+module Atom;
+
+interface ICaller {
+	[HTTPCallable] Int call();
+}
+class Caller implements ICaller {
+	Int call() {
+		Int iter = 0;
+		while (iter < 100) {	
+			IA ia = new local A();			// new object will force field_with_oid to create new atom
+			ia.getAttr();
+			iter = iter + 1;
+		}
+		return 0;	
+	}
+}
+
+interface IA {
+	Int getAttr();
+}
+class A implements IA {
+	Int attr = 10;	
+	Int getAttr () {
+		return this.attr;
+	}
+}
+
+{
+	[HTTPName: "abc"] ICaller ia = new Caller();
+}
